@@ -32,6 +32,7 @@ import edu.mit.cameraCulture.vblocks.predefined.GrayscaleJavascript;
 import edu.mit.cameraCulture.vblocks.predefined.GrayscaleNative;
 import edu.mit.cameraCulture.vblocks.predefined.HistogramEqualization;
 import edu.mit.cameraCulture.vblocks.predefined.If;
+import edu.mit.cameraCulture.vblocks.predefined.IfOnce;
 import edu.mit.cameraCulture.vblocks.predefined.LetterBasedGrader;
 import edu.mit.cameraCulture.vblocks.predefined.OCR;
 import edu.mit.cameraCulture.vblocks.predefined.OpticalFlow;
@@ -209,6 +210,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// STRUCTURE ITEMS
 		ArrayList<TemplateView> structureItems = new ArrayList<TemplateView>();
 		structureItems.add(TemplateView.CreateTemplate(this, R.drawable.module_structure_button,R.drawable.module_if, If.class,If.getModuleName()));
+		structureItems.add(TemplateView.CreateTemplate(this, R.drawable.module_structure_button,R.drawable.module_if, IfOnce.class,IfOnce.getModuleName()));
 		menu.addView(new ModuleMenu(this,frame,	structureItems,R.drawable.module_structure_button,R.drawable.module_logic), lp);
 		
 		// ALERT ITEMS

@@ -25,6 +25,9 @@ import edu.mit.cameraCulture.vblocks.CommitableView;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.Sample;
+import edu.mit.cameraCulture.vblocks.Module.OutputBool;
+import edu.mit.cameraCulture.vblocks.Module.OutputInt;
+import edu.mit.cameraCulture.vblocks.Module.OutputMat;
 
 public class Canny extends Module {
 
@@ -60,6 +63,10 @@ public class Canny extends Module {
 	public Canny() {
 		super(REGISTER_SERVICE_NAME);
 	}
+	
+	@OutputBool( vars = {"OUT_OF_BOUNDS"})
+	@OutputMat( vars = {"RECT"})
+	@OutputInt( vars = {"Int"})
 
 	@Override
 	public ExecutionCode execute(Sample image) {

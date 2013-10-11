@@ -68,16 +68,21 @@ public class If extends ModuleCollection {
 			this.addView(label,params);
 			
 			mVariableSpinner = new Spinner(context);
+			
+			// Get variables from all modules
 			mVariableMap = ((MainActivity)context).getModules().getVariables();
 			mListOfVars = new ArrayList<String>(mVariableMap.keySet());
 			Collections.sort(mListOfVars);
+			
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item, mListOfVars);
 			mVariableSpinner.setAdapter(adapter);
+			
 			if(mVariableMap.containsKey(mExpression)){
 				int i=0;
 				while(!mListOfVars.get(i).equals(mExpression) && mListOfVars.size() > i++);
 				mVariableSpinner.setSelection(i);
 			}
+			
 			mVariableSpinner.setOnItemSelectedListener(new OperationSelector());
 			this.addView(mVariableSpinner,params);
 		}
