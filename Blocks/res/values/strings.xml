@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VBlocks</string>
+   	<string name="button_cancel">Cancel</string>
+   	<string name="content_desc_camera_button">Camera Button</string>
+    <string name="content_desc_close_button">Close Button</string>
+    <string name="content_desc_new_target_button">New Target Button</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="intro">MainLoop</string>
+    <string name="instructions_overlay_button_ok">OK</string>
+    <string name="instructions_overlay_button_cancel">Cancel</string>
+    <string name="menu_camera_title">Options</string>
+    <string name="menu_contAutofocus_on">Cont. Autofocus On</string>
+    <string name="menu_contAutofocus_off">Cont. Autofocus Off</string>
+    <string name="menu_flash_on">Flash On</string>
+    <string name="menu_flash_off">Flash Off</string>
+    <string name="menu_settings">Settings</string>
+    <string name="overlay_build_target_help">Hold the device parallel to the target</string>
+    <string name="choice_1">Most favorite</string>
+    <string name="choice_2">-</string>
+    <string name="choice_3">Least favorite</string>
+    <string name="start">Start</string>
+    <string name="target_quality_error_title">Low Quality Image</string>
+    <string name="target_quality_error_desc">The image has very little detail, please try another.</string>
+</resources>

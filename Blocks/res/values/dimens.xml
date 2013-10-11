@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="about_title">18sp</dimen>
+    <dimen name="about_text">14sp</dimen>
+    <dimen name="splash_title">40sp</dimen>
+    <dimen name="splash_subtitle">20sp</dimen>
+    <dimen name="instructions_ok_cancel_padding">15dp</dimen>
+    <dimen name="instructions_points">15sp</dimen>
+    <dimen name="instructions_buttons">14sp</dimen>
+    <dimen name="instructions_numbers">40sp</dimen>
+    <dimen name="cancel_text">13sp</dimen>
+
+</resources>

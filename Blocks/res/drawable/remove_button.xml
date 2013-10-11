@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_drag_hovered="true" >
+        <color android:color="#66FF0000"/>
+    </item>
+    <item>
+        <color android:color="#33FFFFFF"/>
+    </item>
+</selector>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/camera_overlay_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ViewStub
+        android:id="@+id/overlay_build_target_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout="@layout/build_target_help"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/semi_transparent_black"
+        android:padding="30dip"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/overlay_bottom_bar_background"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:weightSum="1" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0"
+            android:background="@color/overlay_bottom_bar_separators" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:gravity="center" >
+
+            <ImageButton
+                android:id="@+id/camera_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:contentDescription="@string/content_desc_camera_button"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/camera_button_background" />
+
+            <ImageButton
+                android:id="@+id/new_target_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:contentDescription="@string/content_desc_new_target_button"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:src="@drawable/close_button_background" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0"
+            android:background="@color/overlay_bottom_bar_separators" />
+
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.25"
+            android:background="@null"
+            android:contentDescription="@string/content_desc_close_button"
+            android:onClick="onCloseClick"
+            android:text="@string/button_cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cancel_text" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/bottom_bar"
+        android:background="@color/overlay_bottom_bar_separators" />
+
+    <!-- ViewStub
+        android:id="@+id/instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout="@layout/instructions_overlay"
+        android:visibility="gone" /-->
+
+</RelativeLayout>

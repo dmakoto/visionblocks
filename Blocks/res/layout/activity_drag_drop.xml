@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top|right">
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    android:padding="10dp"
+	    android:paddingLeft="50dp"
+	    android:paddingRight="50dp" >
+			
+	    	<HorizontalScrollView
+			        android:layout_width="wrap_content"
+			        android:layout_height="50dp"
+			        android:layout_marginBottom="10dp" 
+			        android:layout_marginTop="10dp"> 
+			    <LinearLayout
+			        android:id="@+id/menu" 
+			        android:layout_width="wrap_content"
+			        android:layout_height="50dp"
+			        android:orientation="horizontal">
+			    </LinearLayout>
+			</HorizontalScrollView>
+		    <ScrollView 
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp" 
+		        android:layout_weight="1">
+		        <edu.mit.cameraCulture.vblocks.ui.BlockGroupView
+		            android:id="@+id/component"
+		            android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginRight="50dp" />
+	    	</ScrollView>
+	    
+	    <Button
+	        android:id="@+id/buttonStart"
+	        android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Start" />
+
+	</LinearLayout>
+
+	<edu.mit.cameraCulture.vblocks.ui.Trash
+	    android:visibility="gone"
+	    android:id="@+id/delete_button"
+	    android:layout_width="70dp"
+	    android:layout_height="50dp"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:scaleType="centerInside"
+	    android:src="@android:drawable/ic_menu_delete" 
+	    android:background="@drawable/remove_button"/>
+		
+</RelativeLayout>

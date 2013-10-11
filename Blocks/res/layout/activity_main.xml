@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity" 
+    android:layout_gravity="fill"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/main_layout">
+
+    <!-- LinearLayout
+        android:layout_weight="0.5"
+	    android:layout_width="0dp"
+	    android:layout_gravity="center"
+	    
+	    android:layout_height="220dp"
+	    android:id="@+id/main_layout">
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_weight="0.5"
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:id="@+id/main_layout"> 
+		   	<ImageView android:id="@+id/image"
+				android:layout_width="fill_parent" 
+				android:layout_height="fill_parent"
+				android:layout_weight="1" />
+	</LinearLayout-->
+</RelativeLayout>
