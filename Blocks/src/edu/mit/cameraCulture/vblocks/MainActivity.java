@@ -39,6 +39,7 @@ import edu.mit.cameraCulture.vblocks.predefined.OpticalFlow;
 import edu.mit.cameraCulture.vblocks.predefined.Pixelize;
 import edu.mit.cameraCulture.vblocks.predefined.RemoteVideo;
 import edu.mit.cameraCulture.vblocks.predefined.ScreenOutput;
+import edu.mit.cameraCulture.vblocks.predefined.TakePicture;
 import edu.mit.cameraCulture.vblocks.predefined.augmenter.Augmenter;
 import edu.mit.cameraCulture.vblocks.predefined.display3D.Renderer3D;
 import edu.mit.cameraCulture.vblocks.ui.BlockDragListener;
@@ -226,6 +227,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, Blur.class, Blur.getModuleName()));
 		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, ColorBlobDetector.class, ColorBlobDetector.getModuleName()));
 		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, DrawBox.class, DrawBox.getModuleName()));
+		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, TakePicture.class, TakePicture.getModuleName()));
 		menu.addView(new ModuleMenu(this,frame,	applicationsItems,R.drawable.module_applications_button,R.drawable.module_shape), lp);
 		
 	}

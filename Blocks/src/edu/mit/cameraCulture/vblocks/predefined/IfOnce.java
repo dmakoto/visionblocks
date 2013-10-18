@@ -47,7 +47,7 @@ public class IfOnce extends ModuleCollection {
 	}
 	
 	public static String getModuleName(){
-		return "IF";
+		return "IF ONCE";
 	}
 	
 	@Override

@@ -2,10 +2,6 @@ package edu.mit.cameraCulture.vblocks.predefined;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import edu.mit.cameraCulture.vblocks.Module;
-import edu.mit.cameraCulture.vblocks.Sample;
-import edu.mit.cameraCulture.vblocks.EngineActivity;
-
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,8 +13,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import edu.mit.cameraCulture.vblocks.EngineActivity;
+import edu.mit.cameraCulture.vblocks.Module;
+import edu.mit.cameraCulture.vblocks.Sample;
 
 public class Camera extends Module implements android.hardware.Camera.PreviewCallback{
 
@@ -29,10 +30,13 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 	private int mFrameHeight;
 	
 	private final Object lock = new Object();
-
 	
 	public Camera(){
 		super(REGISTER_SERVICE_NAME);
+	}
+	
+	public void takePicture() {
+		mPreview.takePicture();
 	}
 	
 	@Override
@@ -45,7 +49,7 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 	@Override
 	public void onDestroyModule(){
 		mContext.getLayout().removeView(mPreview);
-		super.onDestroyModule();	
+		super.onDestroyModule();
 	}
 	
 	@Override
@@ -216,7 +220,7 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 //	   }
 	
 	
-	private android.hardware.Camera.PreviewCallback getCamereCallback(){
+	private android.hardware.Camera.PreviewCallback getCameraCallback(){
 		return this;
 	}
 	
@@ -315,7 +319,7 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 					bimage = new byte[ps.getPreviewSize().width* ps.getPreviewSize().height * 3];
 				}
 	            mCamera.addCallbackBuffer(bimage);
-	            mCamera.setPreviewCallbackWithBuffer(getCamereCallback());
+	            mCamera.setPreviewCallbackWithBuffer(getCameraCallback());
 	        } catch (IOException e) {
 	            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
 	        }
@@ -359,7 +363,7 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 	        // start preview with new settings
 	        try {
 	        	mCamera.setPreviewDisplay(mHolder);
-	            mCamera.setPreviewCallback(getCamereCallback());
+	            mCamera.setPreviewCallback(getCameraCallback());
 	            mCamera.startPreview();
 	        } catch (Exception e){
 	            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
@@ -376,7 +380,14 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 	            return false;
 	        }
 	    }
-}
+		public void takePicture() {
+			mCamera.takePicture(null, null,
+			        new PhotoHandler(mContext));
+			
+			// Start preview again!
+			mCamera.startPreview();
+		}
+	}
 
 
 
