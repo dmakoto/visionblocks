@@ -149,4 +149,19 @@ public class ModuleCollection extends Module implements Collection<Module> {
 		}
 		return vars;
 	}
+	
+	@Override
+	public Module find(String name){
+		
+		if (this.getName().equals(name))
+			return this;
+		
+		Iterator it = this.iterator();
+		while(it.hasNext()){
+			Module m = ((Module) it.next()).find(name);
+			if(m != null)
+				return m;
+		}
+		return null;
+	}
 }

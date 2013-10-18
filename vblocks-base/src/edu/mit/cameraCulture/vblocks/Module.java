@@ -115,4 +115,11 @@ public abstract class Module extends IntentService {
 			Log.e("VisionBlocks", "If block: incorrect annotation for execute method ");
 		}
 	}
+	
+	public Module find(String name) {
+		if ( this.getName().equals(name) ) {
+			return this;
+		}
+		else return null;
+	}
 }
