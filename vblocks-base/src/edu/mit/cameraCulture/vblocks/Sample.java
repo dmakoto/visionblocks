@@ -56,6 +56,12 @@ public class Sample {
 		}
 	}
 	
+	public void removeMat(String matName){
+		if(mSateliteMats.containsKey(matName)){
+			mSateliteMats.remove(matName);
+		}
+	}
+	
 	
 	public Scalar getScalar(String scalarName){
 		return mSateliteScalars.containsKey(scalarName)?mSateliteScalars.get(scalarName):null;

@@ -20,6 +20,7 @@ public abstract class EngineActivity extends Activity {
 	
 	protected Thread mWorker;
 	protected boolean mIsRunning;
+	protected Sample image;
 	
 	public abstract RelativeLayout getLayout();
 	
@@ -71,12 +72,12 @@ public abstract class EngineActivity extends Activity {
 	}
 	
 	private void initializeModules(Module program){
+		this.image = new Sample();
 		program.onCreate(this);
 	}
 	
 	protected void executeModules(Module program){
-		Sample s = new Sample(); 
-		program.execute(s);
+		program.execute(image);
 	}
 	
 	private void uninitializeModules(Module program){
