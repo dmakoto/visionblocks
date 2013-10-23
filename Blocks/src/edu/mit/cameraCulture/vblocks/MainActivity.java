@@ -40,6 +40,7 @@ import edu.mit.cameraCulture.vblocks.predefined.Pixelize;
 import edu.mit.cameraCulture.vblocks.predefined.RemoteVideo;
 import edu.mit.cameraCulture.vblocks.predefined.ScreenOutput;
 import edu.mit.cameraCulture.vblocks.predefined.TakePicture;
+import edu.mit.cameraCulture.vblocks.predefined.TakeRawPicture;
 import edu.mit.cameraCulture.vblocks.predefined.augmenter.Augmenter;
 import edu.mit.cameraCulture.vblocks.predefined.display3D.Renderer3D;
 import edu.mit.cameraCulture.vblocks.ui.BlockDragListener;
@@ -84,6 +85,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("On Create", "Runned");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_drag_drop);
 		CreateMenu();
@@ -228,6 +230,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, ColorBlobDetector.class, ColorBlobDetector.getModuleName()));
 		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, DrawBox.class, DrawBox.getModuleName()));
 		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, TakePicture.class, TakePicture.getModuleName()));
+		applicationsItems.add(TemplateView.CreateTemplate(this, R.drawable.module_applications_button,R.drawable.module_shape, TakeRawPicture.class, TakeRawPicture.getModuleName()));
 		menu.addView(new ModuleMenu(this,frame,	applicationsItems,R.drawable.module_applications_button,R.drawable.module_shape), lp);
 		
 	}
@@ -238,6 +241,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	@Override
 	protected void onStart() {
+		Log.d("On Start", "Runned");
 		Module program = VBlocksApplication.getProgram();
 		if(program != null){
 			BlockGroupView blockGroup = (BlockGroupView)findViewById(id.component);
@@ -251,6 +255,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	@Override
 	protected void onPause() {
+		Log.d("On Pause", "Runned");
 		super.onPause();
 	}
 	
@@ -259,7 +264,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+		Log.d("On Resume", "Runned");
 		OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
 	}
 	
@@ -269,6 +274,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	@Override
 	protected void onStop() {
+		Log.d("On Stop", "Runned");
 		if(VBlocksApplication.getProgram() == null){
 			VBlocksApplication.setProgram(getModules());
 		}
@@ -316,6 +322,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		//collection.clear();
 		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.d("On Destroy", "Runned");
 	}
 	
 }

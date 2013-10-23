@@ -1,20 +1,21 @@
 package edu.mit.cameraCulture.vblocks.ui;
 
-import edu.mit.cameraCulture.vblocks.CommitableView;
-import edu.mit.cameraCulture.vblocks.Module;
-import edu.mit.cameraCulture.vblocks.ModuleCollection;
-import edu.mit.cameraCulture.vblocks.R;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import edu.mit.cameraCulture.vblocks.CommitableView;
+import edu.mit.cameraCulture.vblocks.Module;
+import edu.mit.cameraCulture.vblocks.ModuleCollection;
+import edu.mit.cameraCulture.vblocks.R;
 
 /**
  * A GroupView of BlockViews. It has instances of modules, which can be
@@ -57,6 +58,8 @@ public class BlockGroupView extends LinearLayout {
 	
 	public void clearAllChildren(){
 		mContent.removeAllViews();
+		// Clear modules in the BlockGroupView
+		mModule = new ModuleCollection("Program");
 		System.gc();
 	} 
 	

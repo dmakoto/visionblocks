@@ -20,7 +20,6 @@ public class TakePicture extends Module{
 	
 	private Calendar calend;
 	private Bitmap bitmapImg;
-	private android.hardware.Camera mCamera;
 	
 	// Mat used by the module
 	Mat mYUV_Mat;

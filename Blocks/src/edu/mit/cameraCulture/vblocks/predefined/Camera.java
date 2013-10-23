@@ -13,10 +13,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.Sample;
@@ -60,6 +58,11 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 				image.setImageData(mCurrentFrame, mFrameWidth, mFrameHeight);
 			} catch (InterruptedException e) {
 				Log.e(REGISTER_SERVICE_NAME,e.getMessage());
+			}
+			if(image.getMat("TAKE_RAW_PICTURE") != null) {
+				image.removeMat("TAKE_RAW_PICTURE");
+				this.takePicture();
+				Log.d("Camera", "TAKE_RAW_PICTURE");
 			}
 		}
 		return ExecutionCode.NONE;
