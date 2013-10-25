@@ -55,6 +55,7 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 		synchronized(lock) {
 			try {
 				lock.wait();
+				// Sets the image data
 				image.setImageData(mCurrentFrame, mFrameWidth, mFrameHeight);
 			} catch (InterruptedException e) {
 				Log.e(REGISTER_SERVICE_NAME,e.getMessage());
