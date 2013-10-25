@@ -17,5 +17,7 @@ public class PhotoHandler implements PictureCallback {
   public void onPictureTaken(byte[] data, Camera camera) {
 	  Storage mStorage = new Storage(context);
 	  mStorage.save(data);
+	  // Restart Camera!
+	  camera.startPreview();
   }
 }

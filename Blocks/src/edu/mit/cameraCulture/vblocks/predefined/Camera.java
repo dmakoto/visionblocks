@@ -386,9 +386,6 @@ public class Camera extends Module implements android.hardware.Camera.PreviewCal
 		public void takePicture() {
 			mCamera.takePicture(null, null,
 			        new PhotoHandler(mContext));
-			
-			// Start preview again!
-			mCamera.startPreview();
 		}
 	}
 
