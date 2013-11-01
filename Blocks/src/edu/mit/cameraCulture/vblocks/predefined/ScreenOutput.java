@@ -1,7 +1,11 @@
 package edu.mit.cameraCulture.vblocks.predefined;
 
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
@@ -14,9 +18,10 @@ public class ScreenOutput extends Module {
 
 	public static final String REGISTER_SERVICE_NAME = "OutputModule";
 	private ImageView mImageView;
-	private int [] image8888 = null;
 	private int width;
 	private int height;
+	Bitmap bitmapImg;
+	private Mat mRgb_Mat;
 	
 	public ScreenOutput() {
 		super(REGISTER_SERVICE_NAME);
@@ -39,21 +44,18 @@ public class ScreenOutput extends Module {
 	
 	@Override
 	public ExecutionCode execute(Sample image) {
-		if(image8888 == null){
-			image8888 = new int[image.getWidth() * image.getHeight()];
-			width = image.getWidth();
-			height = image.getHeight();
-		}
-
-		synchronized (image8888) {
-			decodeYUV420SP(image8888, image.getImageData(), width, height);
-		}
+		mRgb_Mat = image.getRgbMat();
+		width = image.getWidth();
+		height = image.getHeight();
 		
 		mImageView.post(new Runnable() {
 			@Override
 			public void run() {
-				synchronized (image8888) {
-					mImageView.setImageBitmap(Bitmap.createBitmap(image8888, width, height, Bitmap.Config.ARGB_8888));
+				synchronized (mRgb_Mat) {
+					// Convert mRgb_Mat to bitmap to be printed on Screen
+					bitmapImg = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+					Utils.matToBitmap(mRgb_Mat, bitmapImg);
+					mImageView.setImageBitmap(bitmapImg);
 				}
 			}
 		});

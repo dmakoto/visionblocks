@@ -10,6 +10,7 @@ import org.opencv.imgproc.Imgproc;
 import edu.mit.cameraCulture.vblocks.Module.PixelEncoding;
 
 import android.graphics.PixelFormat;
+import android.util.Log;
 
 /**
  * Representation of an Image. It has the basic properties
@@ -117,11 +118,11 @@ public class Sample {
 	}
 	
 	public int getWidth() {
-		return mWidth;
+		return mRgb_Mat.cols();
 	}
 	
 	public int getHeight() {
-		return mHeight;
+		return mRgb_Mat.rows();
 	}
 	
 	public Mat getRgbMat() {

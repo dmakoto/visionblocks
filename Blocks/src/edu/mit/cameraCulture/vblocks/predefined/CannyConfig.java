@@ -21,6 +21,7 @@ public class CannyConfig extends CommitableView {
 	private SeekBar thresholdMinCBox;
 	private SeekBar thresholdMaxCBox;
 	private CheckBox blurCheckBox;
+	private CheckBox maskCheckBox;
 	
 	
 	public CannyConfig(Context context, Canny module) {
@@ -101,6 +102,12 @@ public class CannyConfig extends CommitableView {
 		blurCheckBox.setText("Enable Blur");
 		blurCheckBox.setChecked(cannyMod.getEnableBlur());
 		this.addView(blurCheckBox, params);
+		
+		// Mask Checkbox *******************
+		maskCheckBox = new CheckBox(context);
+		maskCheckBox.setText("Set as mask");
+		maskCheckBox.setChecked(cannyMod.getEnableMask());
+		this.addView(maskCheckBox, params);
 	}
 	
 	public void commit() {
@@ -108,6 +115,7 @@ public class CannyConfig extends CommitableView {
 		cannyMod.setThreshold(thresholdMinCBox.getProgress(),
 								thresholdMaxCBox.getProgress() );
 		cannyMod.setEnableBlur(blurCheckBox.isChecked());
+		cannyMod.setEnableMask(maskCheckBox.isChecked());
 	}
 
 }

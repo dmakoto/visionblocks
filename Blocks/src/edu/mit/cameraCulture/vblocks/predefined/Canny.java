@@ -33,10 +33,6 @@ public class Canny extends Module {
 
 	public static final String REGISTER_SERVICE_NAME = "Canny";
 	
-	// This view is printed over the camera with the treated image in bitmapImg
-	private CannyView view;
-	private Bitmap bitmapImg;
-	
 	// Attributes used in Canny
 	private int thresholdMin = 80;
 	private int thresholdMax = 90;
@@ -44,21 +40,14 @@ public class Canny extends Module {
 	// Enable/Disable blur
 	private boolean enableBlur = true;
 	
-	// Mat used by the module
-	Mat mYUV_Mat;
-	Mat mRgb_Mat;
-	Mat mGray_Mat;
-	Mat mEdges_Mat;
+	// Enable/Disable mask
+	private boolean enableMask = false;
 	
-	// Image Properties
-	private int imgWidth;  
-	private int imgHeight;
+	// Mat
+	private Mat mRgb_Mat;
 	
-	private Rect srcRect; // Source Rectangle
-	private Rect dstRect; // Destination Rectangle
-	
-	Size kSize;
-	int blurSize = 3;
+	private Size kSize;
+	private int blurSize = 3;
 	
 	public Canny() {
 		super(REGISTER_SERVICE_NAME);
@@ -75,59 +64,32 @@ public class Canny extends Module {
 		kSize.height = blurSize;
 		kSize.width = blurSize;
 		
-		// Creates mYUV_Mat from image Sample
-		if(mYUV_Mat == null){
+		mRgb_Mat = image.getRgbMat();
+		
+		// Applying the effect - Good to note that copying Mats have insignificant time practically
+		synchronized (mRgb_Mat) {
+			Mat mIntermediate_Mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC4 );
+			mRgb_Mat.copyTo(mIntermediate_Mat);
 			
-			imgWidth = image.getWidth();
-			imgHeight =  image.getHeight();		
-			mYUV_Mat = new Mat(imgHeight + imgHeight / 2, imgWidth, CvType.CV_8UC1);
-			mRgb_Mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC4 );
-			mGray_Mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC4 );
-			bitmapImg = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
-			
-			// Create a Rect same size as image
-			srcRect = new Rect(0, 0, bitmapImg.getWidth(), bitmapImg.getHeight());
-		}
-		else if( ( image.getWidth() != imgWidth) 
-				|| ( image.getHeight() != imgHeight) ){
-			
-			imgWidth = image.getWidth();
-			imgHeight =  image.getHeight();
-			
-			// Initialize Mats
-			mYUV_Mat = new Mat(imgHeight + imgHeight / 2, imgWidth, CvType.CV_8UC1);
-			mRgb_Mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC4 );	
-			
-			bitmapImg = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
-			srcRect.set(0, 0, bitmapImg.getWidth(), bitmapImg.getHeight());
-		}
-
-		// Applying the effect
-		synchronized (mYUV_Mat) {
-			// Put image data in mYUV_Mat
-			mYUV_Mat.put(0, 0, image.getImageData());		
-			
-			// Convert YUV to RGB, put it in mRgb_Mat
-			Imgproc.cvtColor(mYUV_Mat, mRgb_Mat, Imgproc.COLOR_YUV420sp2RGB, 4);
-		    
 			if(enableBlur){
 			// Apply Blur (doubles processing time)
-				Imgproc.blur(mRgb_Mat, mRgb_Mat, kSize);
+				Imgproc.blur(mRgb_Mat, mIntermediate_Mat, kSize);
 			}
 			
 			// Apply Canny (OpenCV native)
 			// Commitable view to change thresholds?
-			Imgproc.Canny(mRgb_Mat, mRgb_Mat, thresholdMin, thresholdMax);
+			Imgproc.Canny(mIntermediate_Mat, mIntermediate_Mat, thresholdMin, thresholdMax);
 			
-			// Add the Canny Mat as Mask to image
-			image.setMat("Mask", mRgb_Mat);
+			if(enableMask) {
+				// Add the Canny Mat as Mask to image
+				image.setMat("Mask", mIntermediate_Mat);
+			} else {
+				mIntermediate_Mat.copyTo(mRgb_Mat);
+			}
 			
-			// Convert mRgb_Mat to bitmap to be printed on Screen
-			Utils.matToBitmap(mRgb_Mat, bitmapImg);
 			System.gc();
 		}
 		
-		view.postInvalidate();
 		return null;
 	}
 
@@ -147,18 +109,6 @@ public class Canny extends Module {
 		super.onCreate();
 		 
 		kSize = new Size(3,3);
-		
-		// Create a view over the camera, to display the image with Canny.
-		view = new CannyView(Context);
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-		Context.getLayout().addView(view,lp);
-		
-		WindowManager wm = (WindowManager) Context.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		
-		dstRect = new Rect(0,0, size.x, size.y);
 	}
 
 	public static String getModuleName() {
@@ -177,23 +127,7 @@ public class Canny extends Module {
 			      }
 			     
 	};
-	
-	class CannyView extends View{
-		Paint paint;
-	
-		public CannyView(Context Context) {
-			super(Context);
-			paint = new Paint();
-		}
 
-		protected void onDraw(Canvas canvas) {
-			
-			if(bitmapImg != null){		
-				canvas.drawBitmap(bitmapImg, srcRect, dstRect, paint); 
-				
-			}
-		}
-	}
 	
 	public CommitableView getConfigurationView(Context context) {
 		return new CannyConfig(context, this);
@@ -221,5 +155,13 @@ public class Canny extends Module {
 	
 	public void setEnableBlur(boolean b) {
 		this.enableBlur = b;
+	}
+	
+	public boolean getEnableMask() {
+		return this.enableMask;
+	}
+	
+	public void setEnableMask(boolean b) {
+		this.enableMask = b;
 	}
 }

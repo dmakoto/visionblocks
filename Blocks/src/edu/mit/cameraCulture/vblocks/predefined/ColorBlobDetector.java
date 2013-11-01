@@ -16,16 +16,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.Sample;
-import edu.mit.cameraCulture.vblocks.Module.OutputBool;
-import edu.mit.cameraCulture.vblocks.Module.OutputMat;
-import edu.mit.cameraCulture.vblocks.predefined.Blur.BlurView;
 
 public class ColorBlobDetector extends Module{
 	
@@ -38,7 +34,7 @@ public class ColorBlobDetector extends Module{
     private Scalar mLowerBound;
     private Scalar mUpperBound;
     
-    private Mat imgRGBA;
+    private Mat mRgb_Mat;
     private Mat mPyrDownMat;
     private Mat mHsvMat;
     private Mat mMask;
@@ -76,27 +72,11 @@ public class ColorBlobDetector extends Module{
 	
 	public ExecutionCode execute(Sample image) {
 		
-		if(mYuv == null){
-			imgWidth = image.getWidth();
-			imgHeight =  image.getHeight();
-			mYuv = new Mat(imgHeight + imgHeight / 2, imgWidth, CvType.CV_8UC1);
-		}
-		else if( ( image.getWidth() != imgWidth) 
-				|| ( image.getHeight() != imgHeight) ){
-			
-			imgWidth = image.getWidth();
-			imgHeight =  image.getHeight();
-			mYuv = new Mat(imgHeight + imgHeight / 2, imgWidth, CvType.CV_8UC1);
+		mRgb_Mat = image.getRgbMat();
 		
-		}
-		
-		synchronized (mYuv) {	 
-
-			mYuv.put(0, 0, image.getImageData());
+		synchronized (mRgb_Mat) {	 
 			
-			Imgproc.cvtColor(mYuv, imgRGBA, Imgproc.COLOR_YUV420sp2RGB, 4);
-			
-			Imgproc.pyrDown(imgRGBA, mPyrDownMat);
+			Imgproc.pyrDown(mRgb_Mat, mPyrDownMat);
 	        Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
 
 	        Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
@@ -197,8 +177,7 @@ public class ColorBlobDetector extends Module{
 	public void onCreate(EngineActivity context){
 		
 		super.onCreate(context);
-		
-		imgRGBA = new Mat();
+		 
 	    mPyrDownMat = new Mat();
 	    mHsvMat = new Mat();
 	    mMask = new Mat();

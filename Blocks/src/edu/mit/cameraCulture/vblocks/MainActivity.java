@@ -85,7 +85,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d("On Create", "Runned");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_drag_drop);
 		CreateMenu();
@@ -241,7 +240,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	@Override
 	protected void onStart() {
-		Log.d("On Start", "Runned");
 		Module program = VBlocksApplication.getProgram();
 		if(program != null){
 			BlockGroupView blockGroup = (BlockGroupView)findViewById(id.component);
@@ -255,7 +253,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	@Override
 	protected void onPause() {
-		Log.d("On Pause", "Runned");
 		super.onPause();
 	}
 	
@@ -264,7 +261,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d("On Resume", "Runned");
 		OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
 	}
 	
@@ -274,7 +270,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 */
 	@Override
 	protected void onStop() {
-		Log.d("On Stop", "Runned");
 		if(VBlocksApplication.getProgram() == null){
 			VBlocksApplication.setProgram(getModules());
 		}
@@ -327,7 +322,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.d("On Destroy", "Runned");
 	}
 	
 }
