@@ -1,6 +1,5 @@
 package edu.mit.cameraCulture.vblocks.predefined;
 
-import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -8,26 +7,13 @@ import org.opencv.imgproc.Imgproc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.Display;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import edu.mit.cameraCulture.vblocks.CommitableView;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.Sample;
-import edu.mit.cameraCulture.vblocks.Module.OutputBool;
-import edu.mit.cameraCulture.vblocks.Module.OutputInt;
-import edu.mit.cameraCulture.vblocks.Module.OutputMat;
 
 public class Canny extends Module {
 
