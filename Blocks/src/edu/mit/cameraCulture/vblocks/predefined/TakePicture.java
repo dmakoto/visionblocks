@@ -1,7 +1,5 @@
 package edu.mit.cameraCulture.vblocks.predefined;
 
-import java.util.Calendar;
-
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -18,14 +16,10 @@ public class TakePicture extends Module{
 	
 	public static final String REGISTER_SERVICE_NAME = "Take Picture";
 	
-	private Calendar calend;
 	private Bitmap bitmapImg;
 	
 	// Mat used by the module
-	Mat mYUV_Mat;
 	Mat mRgb_Mat;
-	Mat mGray_Mat;
-	Mat mEdges_Mat;
 	
 	// Image Properties
 	private int imgWidth; 
@@ -38,25 +32,18 @@ public class TakePicture extends Module{
 	public ExecutionCode execute(Sample image) {
 		//convert to bitmap and save
 		
+		// Initialize an instance of Storage, used to save the image in the phone
 		Storage mStorage = new Storage(this.mContext);
 		mStorage.save(image.getImageData());
 		imgWidth = image.getWidth();
-		imgHeight =  image.getHeight();		
+		imgHeight =  image.getHeight();
 		
-		mYUV_Mat = new Mat(imgHeight + imgHeight / 2, imgWidth, CvType.CV_8UC1);
-		mRgb_Mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC4 );
+		mRgb_Mat = image.getRgbMat();
 		
 		bitmapImg = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
 		
-		// Put image data in mYUV_Mat
-		mYUV_Mat.put(0, 0, image.getImageData());		
-		
-		// Convert YUV to RGB, put it in mRgb_Mat
-		Imgproc.cvtColor(mYUV_Mat, mRgb_Mat, Imgproc.COLOR_YUV420sp2RGB, 4);
-		
-		// Convert mRgb_Mat to bitmap to be printed on Screen
+		// Convert mRgb_Mat to bitmap
 		Utils.matToBitmap(mRgb_Mat, bitmapImg);
-		
 		mStorage.save(bitmapImg);
 		
 		System.gc();
@@ -78,7 +65,6 @@ public class TakePicture extends Module{
 	
 	public void onCreate(EngineActivity context){
 		super.onCreate(context);
-		calend = Calendar.getInstance();
 		
 	}
 

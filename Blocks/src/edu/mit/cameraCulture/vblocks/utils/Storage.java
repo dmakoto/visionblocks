@@ -20,6 +20,10 @@ public class Storage {
 		this.context = context;
 	}
 	
+	/**
+	 * Saves a stream of bytes as a .jpg image in the phone storage.
+	 * @param data Stream of bytes that represents the image
+	 */
 	public void save(byte[] data) {
 		File pictureFileDir = getDir();
 
@@ -93,7 +97,7 @@ public class Storage {
 
 		try {
 			FileOutputStream fos = new FileOutputStream(pictureFile);
-			bmp.compress(Bitmap.CompressFormat.JPEG, 85, fos);
+			bmp.compress(Bitmap.CompressFormat.JPEG, 80, fos);
 			fos.flush();
 			fos.close();
 			((Activity)context).runOnUiThread(new Runnable() {
