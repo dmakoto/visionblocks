@@ -2,6 +2,8 @@ package edu.mit.cameraCulture.vblocks.predefined;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgproc.Imgproc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +27,7 @@ import edu.mit.cameraCulture.vblocks.Sample;
 
 
 public class OpticalFlow extends Module {
+	
 	class BorderView extends View {
 		private Rect rect = new Rect();
 	    private Point mStartingPoint = new Point();
@@ -153,7 +156,19 @@ public class OpticalFlow extends Module {
 			frect[1] = ((float)r.top)/mArea.getHeight();
 			frect[2] = ((float)r.right)/mArea.getWidth();
 			frect[3] = ((float)r.bottom)/mArea.getHeight();
-			processImage(image.getImageData(),image.getWidth(),image.getHeight(),frect);
+			
+			Mat mYUV_Mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC4 );
+			Imgproc.cvtColor(image.getRgbMat(), mYUV_Mat, Imgproc.COLOR_RGB2YUV_I420);
+
+			byte[] imgData = new byte[image.getImageData().length];
+			
+			mYUV_Mat.get(0,0,imgData);
+			
+			processImage(imgData,image.getWidth(),image.getHeight(),frect);
+			
+			// Works, but is not using the new information
+//			 processImage(image.getImageData(),image.getWidth(),image.getHeight(),frect);
+
 			Mat m = new Mat(2,2,CvType.CV_32FC1);
 			m.put(0, 0, frect);
 			image.setMat("RECT", m);
