@@ -20,6 +20,9 @@ import com.threed.jpct.util.MemoryHelper;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.R;
@@ -61,6 +64,9 @@ public class Renderer3D extends Module {
 
 	}
 
-	
-	
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
+	}
 }

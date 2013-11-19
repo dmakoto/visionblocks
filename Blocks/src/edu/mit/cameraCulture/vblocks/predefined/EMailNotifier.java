@@ -19,6 +19,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Parcel;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -180,5 +182,11 @@ public class EMailNotifier extends Module {
 
 	public void setMailText(String mText) {
 		this.mText = mText;
+	}
+	
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
 	}
 }

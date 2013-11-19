@@ -7,6 +7,9 @@ import org.opencv.imgproc.Imgproc;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.Sample;
@@ -66,6 +69,12 @@ public class TakePicture extends Module{
 	public void onCreate(EngineActivity context){
 		super.onCreate(context);
 		
+	}
+	
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
 	}
 
 }

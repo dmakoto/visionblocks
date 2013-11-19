@@ -15,8 +15,10 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Environment;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.Sample;
@@ -264,4 +266,9 @@ public class RemoteVideo extends Module{
 		
 	}
 
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
+	}
 }

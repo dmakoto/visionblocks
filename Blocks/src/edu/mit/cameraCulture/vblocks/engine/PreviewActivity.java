@@ -1,15 +1,17 @@
 package edu.mit.cameraCulture.vblocks.engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
-import android.support.v4.widget.SlidingPaneLayout;
+import android.util.Log;
 import android.widget.RelativeLayout;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
 import edu.mit.cameraCulture.vblocks.R;
 import edu.mit.cameraCulture.vblocks.Sample;
 import edu.mit.cameraCulture.vblocks.VBlocksApplication;
-import edu.mit.cameraCulture.vblocks.engine.MainMenu.OnMainMenuSelectedListener;
-import edu.mit.cameraCulture.vblocks.ui.PreviewGUI;
+import edu.mit.cameraCulture.vblocks.engine.MainMenuFragment.OnMainMenuSelectedListener;
 
 /**
  * Responsible for running the custom application devised by the user.
@@ -21,6 +23,8 @@ public class PreviewActivity extends EngineActivity implements OnMainMenuSelecte
 	
 	protected RelativeLayout mMainLayout = null;
 	protected Module mProgram = null;
+	protected List<Module> mModuleList;
+	protected String[] mModuleNames;
 	protected PreviewGUI mGUI;
 	
 	@Override
@@ -30,6 +34,8 @@ public class PreviewActivity extends EngineActivity implements OnMainMenuSelecte
 		// Following 3 lines are important
 		setContentView(R.layout.activity_main);
 		mProgram = VBlocksApplication.getProgram(); 
+		mModuleList = mProgram.getModuleList();
+		mModuleNames = getNameList(mModuleList);
 		mMainLayout = (RelativeLayout) findViewById(R.id.main_layout);
 		
 		// Instantiate a GUI using the xml elements: R.id.paneMenu and R.id.paneContent
@@ -66,8 +72,26 @@ public class PreviewActivity extends EngineActivity implements OnMainMenuSelecte
 	}
 
 	@Override
-	public void onMenuOptionSelected(OPTION option) {
-		// TODO Auto-generated method stub
+	public void onMenuOptionSelected(int id) {
+		Log.d("MENU", "Selected item number "+id);
+		MainContentFragment fragment =	(MainContentFragment) mGUI.getMain();
+		fragment.setActiveView(mModuleList.get(id));
+	}
+	
+	private String[] getNameList(List<Module> moduleList) {
+		List<String> nameList = new ArrayList<String>();
 		
+		// Create a list of names
+		for(Module m : moduleList)
+			nameList.add(m.getName());
+		
+		// Create an array of the names from the list of names
+		String[] values = nameList.toArray(new String[nameList.size()]);
+		
+		return values;
+	}
+	
+	public String[] getModuleNames() {
+		return mModuleNames;
 	}
 }

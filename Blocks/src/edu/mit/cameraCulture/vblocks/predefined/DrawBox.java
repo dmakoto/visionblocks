@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -102,6 +103,12 @@ public class DrawBox extends Module{
 		
 		
 		
+	}
+	
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
 	}
 	
 }

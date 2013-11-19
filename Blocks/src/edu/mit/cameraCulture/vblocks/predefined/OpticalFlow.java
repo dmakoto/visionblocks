@@ -236,4 +236,10 @@ public class OpticalFlow extends Module {
 	protected void onHandleIntent(Intent intent) {
 		
 	}
+	
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
+	}
 }

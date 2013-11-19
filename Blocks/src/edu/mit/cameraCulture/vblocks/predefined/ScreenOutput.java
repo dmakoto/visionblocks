@@ -6,6 +6,8 @@ import org.opencv.core.Mat;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
@@ -102,6 +104,12 @@ public class ScreenOutput extends Module {
 	protected void onHandleIntent(Intent intent) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		Log.d("TOUCH", this.toString());
+		return false;
 	}
 
 }

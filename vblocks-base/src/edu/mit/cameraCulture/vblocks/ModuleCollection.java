@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import android.content.Intent;
+import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * A Collection of <code>Module</code>. Has methods from Collection class.
@@ -148,5 +151,27 @@ public class ModuleCollection extends Module implements Collection<Module> {
 			vars.putAll(get(i).getVariables());
 		}
 		return vars;
+	}
+	
+	public List<Module> getModuleList() {
+		List<Module> moduleList = new ArrayList<Module>();
+		
+		for(Module m : this) {
+			
+			if(m instanceof ModuleCollection)
+				moduleList.add(m);
+		
+			List<Module> sublist = m.getModuleList();
+			for(Module sub : sublist)
+				moduleList.add(sub);
+		}
+		
+		return moduleList;
+	}
+
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
