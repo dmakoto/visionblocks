@@ -6,23 +6,26 @@
     android:layout_width="match_parent"
     android:id="@+id/main_layout">
 
-    <!-- LinearLayout
-        android:layout_weight="0.5"
-	    android:layout_width="0dp"
-	    android:layout_gravity="center"
-	    
-	    android:layout_height="220dp"
-	    android:id="@+id/main_layout">
-	</LinearLayout>
-	
-    <LinearLayout
-        android:layout_weight="0.5"
-	    android:layout_width="0dp"
-	    android:layout_height="match_parent"
-	    android:id="@+id/main_layout"> 
-		   	<ImageView android:id="@+id/image"
-				android:layout_width="fill_parent" 
-				android:layout_height="fill_parent"
-				android:layout_weight="1" />
-	</LinearLayout-->
+        <!-- The main content view 
+    based on code from:
+    http://blog.bignerdranch.com/2765-exploring-slidingpanelayout/ -->
+    <android.support.v4.widget.SlidingPaneLayout
+        android:id="@+id/pane"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+ 
+        <FrameLayout
+            android:id="@+id/paneMenu"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+ 
+        <FrameLayout
+            android:id="@+id/paneContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0" />
+    </android.support.v4.widget.SlidingPaneLayout>
+
 </RelativeLayout>

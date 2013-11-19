@@ -1,14 +1,12 @@
 package edu.mit.cameraCulture.vblocks;
 
-import edu.mit.cameraCulture.vblocks.Module;
-import edu.mit.cameraCulture.vblocks.Module.PixelEncoding;
-import edu.mit.cameraCulture.vblocks.Sample;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import edu.mit.cameraCulture.vblocks.Module.PixelEncoding;
 
 /**
  * Runs the activity related to the application devised by the client.
@@ -16,7 +14,7 @@ import android.widget.RelativeLayout;
  * where the application will run.
  * @author CameraCulture
  */
-public abstract class EngineActivity extends Activity {
+public abstract class EngineActivity extends FragmentActivity {
 	
 	protected Thread mWorker;
 	protected boolean mIsRunning;
