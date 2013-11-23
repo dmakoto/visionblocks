@@ -28,7 +28,7 @@ public class PreviewActivity extends EngineActivity {
 	protected List<Module> mModuleList;
 	protected String[] mModuleNames;
 	private DrawerLayout mDrawerLayout;
-	private PreviewGUIMenu mMenu;
+	private PreviewMenu mMenu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class PreviewActivity extends EngineActivity {
 		mModuleList = mProgram.getModuleList();
 		mModuleNames = getNameList(mModuleList);
 		
-		mMenu = new PreviewGUIMenu(this, R.id.left_drawer);
+		mMenu = new PreviewMenu(this, R.id.left_drawer);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		
 		RelativeLayout mainContent = (RelativeLayout) findViewById(R.id.main_content);
