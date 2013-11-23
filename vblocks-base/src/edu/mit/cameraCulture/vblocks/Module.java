@@ -134,22 +134,9 @@ public abstract class Module extends IntentService implements ModuleInterface{
 		list.add(this);
 		return list;
 	}
-//
-//	@Override
-//	public boolean hasNext() {
-//		// Single element, don't have next
-//		return false;
-//	}
-//
-//	@Override
-//	public Object next() {
-//		throw new NoSuchElementException();
-//	}
-//
-//	@Override
-//	public void remove() {
-//		// TODO: We don't need to remove it right now. Maybe when we start to
-//		// update in realtime the Modules
-//		throw new UnsupportedOperationException();
-//	}
+	
+	@Override
+	public ModuleTouchListener getModuleTouchListener() {
+		return null;
+	}
 }

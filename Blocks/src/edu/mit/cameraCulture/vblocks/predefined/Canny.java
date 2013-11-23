@@ -152,10 +152,4 @@ public class Canny extends Module {
 	public void setEnableMask(boolean b) {
 		this.enableMask = b;
 	}
-	
-	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
-		Log.d("TOUCH", this.toString());
-		return false;
-	}
 }

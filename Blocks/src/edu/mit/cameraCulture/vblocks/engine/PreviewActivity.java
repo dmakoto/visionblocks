@@ -61,9 +61,21 @@ public class PreviewActivity extends EngineActivity {
 		return mProgram;
 	};
 	
+	public PreviewGUI getGUI() {
+		return mGUI;
+	}
+	
 	@Override
 	protected void convertColor(Sample s, Module.PixelEncoding dstEncoding) {
 		
+	}
+	
+	public List<Module> getModuleList() {
+		return mModuleList;
+	}
+	
+	public String[] getModuleNames() {
+		return mModuleNames;
 	}
 	
 	private String[] getNameList(List<Module> moduleList) {
@@ -77,9 +89,5 @@ public class PreviewActivity extends EngineActivity {
 		String[] values = nameList.toArray(new String[nameList.size()]);
 		
 		return values;
-	}
-	
-	public String[] getModuleNames() {
-		return mModuleNames;
 	}
 }

@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.content.Intent;
-import android.view.MotionEvent;
-import android.view.View;
 
 /**
  * A Collection of <code>Module</code>. Has methods from Collection class.
@@ -170,8 +168,8 @@ public class ModuleCollection extends Module implements Collection<Module> {
 	}
 
 	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
+	public ModuleTouchListener getModuleTouchListener() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 }

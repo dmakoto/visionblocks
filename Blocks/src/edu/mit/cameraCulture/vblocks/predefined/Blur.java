@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import edu.mit.cameraCulture.vblocks.CommitableView;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
@@ -96,10 +94,4 @@ public class Blur extends Module {
 		}
 
 	};
-
-	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
-		Log.d("TOUCH", this.toString());
-		return false;
-	}
 }

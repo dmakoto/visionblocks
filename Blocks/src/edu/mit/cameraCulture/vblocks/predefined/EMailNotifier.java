@@ -183,10 +183,4 @@ public class EMailNotifier extends Module {
 	public void setMailText(String mText) {
 		this.mText = mText;
 	}
-	
-	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
-		Log.d("TOUCH", this.toString());
-		return false;
-	}
 }

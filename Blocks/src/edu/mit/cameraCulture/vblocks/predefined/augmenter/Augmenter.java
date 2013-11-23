@@ -1505,10 +1505,4 @@ public class Augmenter extends Module {
 	public CommitableView getConfigurationView(Context context) {
 		return new AugmenterConfigurationNew(context, this);
 	}
-	
-	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
-		Log.d("TOUCH", this.toString());
-		return false;
-	}
 }
