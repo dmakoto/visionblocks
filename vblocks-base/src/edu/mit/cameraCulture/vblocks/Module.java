@@ -22,7 +22,7 @@ import android.util.Log;
  * @author CameraCulture
  * 
  */
-public abstract class Module extends IntentService implements ModuleInterface{
+public abstract class Module extends IntentService {
 
 	public enum PixelEncoding {
 		yuv420, argb
@@ -135,8 +135,9 @@ public abstract class Module extends IntentService implements ModuleInterface{
 		return list;
 	}
 	
-	@Override
 	public ModuleTouchListener getModuleTouchListener() {
 		return null;
 	}
+	
+	public abstract ExecutionCode execute(Sample image);
 }
