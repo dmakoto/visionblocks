@@ -28,6 +28,7 @@ public class Blur extends Module {
 
 	}
 
+	@Override
 	public ExecutionCode execute(Sample image) {
 
 		kSize.height = blurSize;
@@ -60,6 +61,7 @@ public class Blur extends Module {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
 	public void onCreate(EngineActivity context) {
 
 		super.onCreate(context);
@@ -67,6 +69,7 @@ public class Blur extends Module {
 		kSize = new Size(20, 20);
 	}
 
+	@Override
 	public CommitableView getConfigurationView(Context context) {
 		return new BlurConfig(context, this);
 	}
@@ -79,6 +82,7 @@ public class Blur extends Module {
 		blurSize = size;
 	}
 
+	@Override
 	public void onDestroyModule() {
 		super.onDestroyModule();
 	}

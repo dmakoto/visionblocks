@@ -4,16 +4,13 @@ import java.util.Random;
 import java.util.Vector;
 
 import org.opencv.android.Utils;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,19 +21,19 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
+import edu.mit.cameraCulture.vblocks.ModuleTouchListener;
 import edu.mit.cameraCulture.vblocks.Sample;
-import edu.mit.cameraCulture.vblocks.predefined.OpticalFlow.BorderView;
 
 public class Grader extends Module {
 
 	public static final String REGISTER_SERVICE_NAME = "Grader";
 
 	private int appState;
+	private ModuleTouchListener listener;
 
 	private Mat baseMatBW;
 	private Mat tempMat;
@@ -120,6 +117,11 @@ public class Grader extends Module {
 		// Log.d("Grader","executed");
 
 		return null;
+	}
+	
+	@Override
+	public ModuleTouchListener getModuleTouchListener() {
+		return listener;
 	}
 
 	public void onCreate(EngineActivity context) {
@@ -373,7 +375,8 @@ public class Grader extends Module {
 
 			touchState = 0;
 
-			this.setOnTouchListener(new OnTouchListener() {
+			listener = new ModuleTouchListener() {
+
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 
@@ -503,7 +506,32 @@ public class Grader extends Module {
 					return true;
 				}
 
-			});
+				@Override
+				public boolean onSingleTapConfirmed(MotionEvent arg0) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+				@Override
+				public boolean onDoubleTapEvent(MotionEvent arg0) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+				@Override
+				public boolean onDoubleTap(MotionEvent arg0) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+
+				}
+			};
+
+			this.setOnTouchListener(listener);
 
 		}
 
@@ -730,13 +758,9 @@ public class Grader extends Module {
 									(aspectY * (float) field.get(0).y),
 									(float) (aspectX * field.get(1).x),
 									(float) (aspectY * field.get(1).y), paint);
-
 					}
-
 				}
-
 			}
 		}
-
 	}
 }

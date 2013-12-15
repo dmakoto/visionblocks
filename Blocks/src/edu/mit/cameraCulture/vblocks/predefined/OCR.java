@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
+import edu.mit.cameraCulture.vblocks.ModuleTouchListener;
 import edu.mit.cameraCulture.vblocks.Sample;
 import edu.mit.cameraCulture.vblocks.predefined.Grader.GraderView;
 
@@ -38,6 +39,7 @@ public class OCR extends Module {
 	// DEFAULT_LANGUAGE;
 
 	private TessBaseAPI baseApi;
+	private ModuleTouchListener listener;
 
 	private int[] image8888;
 	private int imgWidth;
@@ -68,6 +70,11 @@ public class OCR extends Module {
 
 		return null;
 
+	}
+	
+	@Override
+	public ModuleTouchListener getModuleTouchListener() {
+		return listener;
 	}
 
 	@Override
@@ -171,7 +178,8 @@ public class OCR extends Module {
 
 		public OCRView(Context context) {
 			super(context);
-			this.setOnTouchListener(new OCROnTouch());
+			listener = new OCROnTouch();
+			this.setOnTouchListener(listener);
 
 			wordRect = new Rect();
 			paint = new Paint();
@@ -192,7 +200,7 @@ public class OCR extends Module {
 
 		}
 
-		class OCROnTouch implements OnTouchListener {
+		class OCROnTouch implements ModuleTouchListener {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -238,6 +246,30 @@ public class OCR extends Module {
 				}
 
 				return true;
+			}
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public boolean onDoubleTap(MotionEvent e) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean onDoubleTapEvent(MotionEvent e) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean onSingleTapConfirmed(MotionEvent e) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 
 		}

@@ -26,6 +26,7 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 
 import edu.mit.cameraCulture.vblocks.EngineActivity;
 import edu.mit.cameraCulture.vblocks.Module;
+import edu.mit.cameraCulture.vblocks.ModuleTouchListener;
 import edu.mit.cameraCulture.vblocks.R;
 import edu.mit.cameraCulture.vblocks.Sample;
 
@@ -39,6 +40,7 @@ public class LetterBasedGrader extends Module {
 			+ DEFAULT_LANGUAGE;
 
 	private TessBaseAPI baseApi;
+	private ModuleTouchListener listener;
 
 	private int[] image8888;
 	private int imgWidth;
@@ -72,6 +74,11 @@ public class LetterBasedGrader extends Module {
 
 		return null;
 
+	}
+	
+	@Override
+	public ModuleTouchListener getModuleTouchListener() {
+		return listener;
 	}
 
 	public String getName() {
@@ -196,7 +203,8 @@ public class LetterBasedGrader extends Module {
 
 		public LetterGraderView(Context context) {
 			super(context);
-			this.setOnTouchListener(new LetterGraderOnTouch());
+			listener = new LetterGraderOnTouch();
+			this.setOnTouchListener(listener);
 
 			rand = new Random();
 
@@ -478,7 +486,7 @@ public class LetterBasedGrader extends Module {
 			return res;
 		}
 
-		class LetterGraderOnTouch implements OnTouchListener {
+		class LetterGraderOnTouch implements ModuleTouchListener {
 
 			public boolean onTouch(View v, MotionEvent event) {
 
@@ -591,6 +599,30 @@ public class LetterBasedGrader extends Module {
 				}
 
 				return true;
+			}
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public boolean onDoubleTap(MotionEvent arg0) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean onDoubleTapEvent(MotionEvent arg0) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean onSingleTapConfirmed(MotionEvent arg0) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		}
 
